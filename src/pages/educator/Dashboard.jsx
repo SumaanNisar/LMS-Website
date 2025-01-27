@@ -1,6 +1,7 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
-const dashboard = () => {
+const Dashboard = () => {
   return (
     <div>
       <h1>dashboard</h1>
@@ -8,4 +9,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default Dashboard;
