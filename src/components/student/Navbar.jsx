@@ -6,7 +6,7 @@ import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 const Navbar = () => {
   const CourseListPage = location.pathname.includes("/course-list");
   const { openSignIn } = useClerk();
-  const { user } = useUser;
+  const { user } = useUser(); // Fix here: call the hook as a function
   return (
     <div
       className={`flex items-center justify-between px-4 sm:px-10 md:px-14 lg:px-36 border-b border-gray-500 py-4  ${
@@ -24,7 +24,7 @@ const Navbar = () => {
           )}
         </div>
         {user ? (
-          UserButton
+          <UserButton />
         ) : (
           <button
             onClick={() => openSignIn()}
