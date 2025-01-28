@@ -1,19 +1,26 @@
 import React from "react";
 import { assets } from "../../assets/assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 
 const Navbar = () => {
+  const navigate = useNavigate(); // Use the hook here
   const CourseListPage = location.pathname.includes("/course-list");
   const { openSignIn } = useClerk();
-  const { user } = useUser(); // Fix here: call the hook as a function
+  const { user } = useUser();
+
   return (
     <div
-      className={`flex items-center justify-between px-4 sm:px-10 md:px-14 lg:px-36 border-b border-gray-500 py-4  ${
+      className={`flex items-center justify-between px-4 sm:px-10 md:px-14 lg:px-36 border-b border-gray-500 py-4 ${
         CourseListPage ? "bg-white" : "bg-cyan-100/70"
       }`}
     >
-      <img src={assets.logo} alt="" className="w-28 lg:32 cursor-pointer" />
+      <img
+        onClick={() => navigate("/")} // Correct navigation here
+        src={assets.logo}
+        alt=""
+        className="w-28 lg:32 cursor-pointer"
+      />
       <div className="hidden md:flex items-center gap-5 text-gray-500">
         <div>
           {user && (
@@ -34,7 +41,7 @@ const Navbar = () => {
           </button>
         )}
       </div>
-      {/* //FOR MOBILE PHONES */}
+      {/* FOR MOBILE PHONES */}
       <div className="md:hidden flex items-center gap-2 sm:gap-5 text-gray-500">
         <div className="flex items-center gap-1 sm:gap-2 max-sm:text-xs">
           {user && (
