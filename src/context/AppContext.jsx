@@ -26,6 +26,7 @@ export const AppContextProvider = (props) => {
     });
     return totalRating / course.courseRatings.length;
   };
+
   const calculateNoOflectures = (course) => {
     let totalLectures = 0;
     course.courseContent.forEach((chapter) => {
@@ -37,17 +38,39 @@ export const AppContextProvider = (props) => {
   };
 
   const calculateChapterTime = (chapter) => {
+    if (
+      !chapter ||
+      !chapter.chapterContent ||
+      !Array.isArray(chapter.chapterContent)
+    ) {
+      return humanizeDuration(0, { units: ["h", "m"] });
+    }
+
     let time = 0;
-    chapter.chapterContext.map((lecture) => (time += lecture.lectureDuration));
+    chapter.chapterContent.forEach((lecture) => {
+      time += lecture?.lectureDuration || 0;
+    });
+
     return humanizeDuration(time * 60 * 1000, { units: ["h", "m"] });
   };
+
   const calculateCourseDuration = (course) => {
+    if (!course || !course.courseContent) {
+      return humanizeDuration(0, { units: ["h", "m"] });
+    }
+
     let time = 0;
-    course.courseContent.map((chapter) =>
-      chapter.chapterContent.map((lecture) => (time += lecture.lectureDuration))
-    );
+    course.courseContent.forEach((chapter) => {
+      if (chapter.chapterContent) {
+        chapter.chapterContent.forEach((lecture) => {
+          time += lecture?.lectureDuration || 0;
+        });
+      }
+    });
+
     return humanizeDuration(time * 60 * 1000, { units: ["h", "m"] });
   };
+
   useEffect(() => {
     fetchAllCourses();
   }, []);
