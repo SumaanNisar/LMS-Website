@@ -1,9 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import { dummyCourses } from "../assets/assets";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 export const AppContext = createContext();
 
 export const AppContextProvider = (props) => {
+  const navigate = useNavigate(); // Use useNavigate to get the navigate function
   const currency = import.meta.env.VITE_CURRENCY;
 
   const [allCourses, setAllCourses] = useState([]);
@@ -13,7 +15,6 @@ export const AppContextProvider = (props) => {
     setAllCourses(dummyCourses);
   };
 
-  // Fix: Updated `calculateRating` to accept a `course` parameter
   const calculateRating = (course) => {
     if (course.courseRatings.length === 0) {
       return 0;
@@ -35,6 +36,7 @@ export const AppContextProvider = (props) => {
     calculateRating,
     isEducator,
     setIsEducator,
+    navigate, // Include navigate in the context value
   };
 
   return (
