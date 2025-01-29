@@ -14,12 +14,7 @@ if (!PUBLISHABLE_KEY) {
 }
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <ClerkProvider
-      publishableKey={
-        "pk_test_c3RpcnJlZC1sb2N1c3QtMzYuY2xlcmsuYWNjb3VudHMuZGV2JA"
-      }
-      afterSignOutUrl={"/"}
-    >
+    <ClerkProvider publishableKey={`${PUBLISHABLE_KEY}`} afterSignOutUrl={"/"}>
       <AppContextProvider>
         <App />
       </AppContextProvider>
