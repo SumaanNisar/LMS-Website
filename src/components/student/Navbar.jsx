@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { assets } from "../../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
+import { AppContext } from "../../context/AppContext";
 
 const Navbar = () => {
-  const navigate = useNavigate(); // Use the hook here
+  const { isEducator } = useContext(AppContext);
+  const navigate = useNavigate();
   const CourseListPage = location.pathname.includes("/course-list");
   const { openSignIn } = useClerk();
   const { user } = useUser();
@@ -16,16 +18,19 @@ const Navbar = () => {
       }`}
     >
       <img
-        onClick={() => navigate("/")} // Correct navigation here
+        onClick={() => navigate("/")}
         src={assets.logo}
         alt=""
         className="w-28 lg:32 cursor-pointer"
       />
       <div className="hidden md:flex items-center gap-5 text-gray-500">
-        <div>
+        <div className="flex items-center gap-4">
           {user && (
             <>
-              <button>Become Educator </button>|{" "}
+              <button onClick={() => navigate("/educator")}>
+                {isEducator ? "Educator Dashboard" : "Become Educator"}
+              </button>
+              <span className="text-gray-400">|</span>
               <Link to="/my-enrollments">My Enrollments</Link>
             </>
           )}
@@ -46,8 +51,9 @@ const Navbar = () => {
         <div className="flex items-center gap-1 sm:gap-2 max-sm:text-xs">
           {user && (
             <>
-              <button>Become Educator </button>|{" "}
-              <Link to="/my-enrollments">My Enrollments</Link>
+              <button onClick={() => navigate("/educator")}>
+                {isEducator ? "Educator Dashboard " : "Become Educator "}
+              </button>
             </>
           )}
         </div>

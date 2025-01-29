@@ -32,7 +32,6 @@ const CourseCard = ({ course }) => {
               />
             ))}
           </div>
-          <p className="text-gray-500">22</p>
         </div>
         <p className="text-base font-semibold text-gray-800">
           {currency}
