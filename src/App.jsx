@@ -7,7 +7,7 @@ import MyEnrollment from "./pages/student/MyEnrollment";
 import Player from "./pages/student/Player";
 import Loading from "./components/student/Loading";
 import Educator from "./pages/educator/Educator";
-import Dashboard from "./pages/educator/dashboard";
+// import Dashboard from "./pages/educator/dashboard";
 import AddCourse from "./pages/educator/AddCourses";
 import MyCourses from "./pages/educator/MyCourses";
 import StudentEnrolled from "./pages/educator/StudentEnrolled";
@@ -28,12 +28,12 @@ const App = () => {
         <Route path="/player/:courseId" element={<Player />} />
         <Route path="/loading" element={<Loading />} />
         // Educator Routes //
-        <Route path="/educator" element={<Educator />}>
+        {/* <Route path="/educator" element={<Educator />}>
           <Route index element={<Dashboard />} />
           <Route path="add-course" element={<AddCourse />} />
           <Route path="my-course" element={<MyCourses />} />
           <Route path="student-enrolled" element={<StudentEnrolled />} />
-        </Route>
+        </Route> */}
       </Routes>
     </div>
   );
